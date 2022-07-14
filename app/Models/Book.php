@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Book extends Model
+{
+    protected $table = 'books';
+    protected $guarded = [];
+
+
+    public  function images (){
+        return $this->hasMany(BookImage::class,'images_id' );
+    }
+}
