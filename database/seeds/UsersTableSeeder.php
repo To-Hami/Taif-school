@@ -7,13 +7,20 @@ class UsersTableSeeder extends Seeder
 
     public function run()
     {
-        $user = \App\User::create([
-            'first_name' => 'super',
-            'last_name' => 'admin',
-            'email' => 'admin@app.com',
+        $emails = ['tohami00076@gmail.com','admin@app.com'];
+
+        foreach ( $emails as $email ){
+
+            $user = \App\User::create([
+                'first_name' => 'super',
+                'last_name' => 'admin',
+                'email' => $email ,
             'password' => bcrypt('password'),
         ]);
-        $user->attachRole('super_admin');
+            $user->attachRole('super_admin');
+        }
+
+
 
     }
 }

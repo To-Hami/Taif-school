@@ -16,20 +16,23 @@
 
         <div class="col-md-12 mb-30 print ">
 
-            <h3 style="text-align: center;margin: 20px">استمارة توثيق برنامج</h3>
+            <h3 style="background-color: #84ba3f; padding:20px;text-align: center;margin: 20px;color: #f2f2f2">استمارة توثيق برنامج</h3>
             <div class="row" style="margin: 20px 0">
-                <div class="col-md-4">
-                    <h5>المملكة العربية السعودية </h5>
-                    <h5>وزارة التعليم </h5>
-                    <h5>ادارة التعليم بالطائف </h5>
-
-                    <h5>التوجيه والارشاد</h5>
+                <div class="col-md-4" style="border: 2px solid #84ba3f ;color: #ada9ae !important; ">
+                    <h5 style="color: #544949;margin-bottom: 15px">المملكة العربية السعودية </h5>
+                    <h5 style="color: #544949;margin-bottom: 15px">وزارة التعليم </h5>
+                    <h5 style="color: #544949;margin-bottom: 15px">ادارة التعليم {{$history->region}} </h5>
+                    <h5 style="color: #544949;margin-bottom: 15px">مدرسة: {{$history->name}}  </h5>
+                    <h5 style="color: #544949;margin-bottom: 15px"> المدير :{{$history->manager_name}} </h5>
+                    <h5 style="color: #544949;margin-bottom: 15px">التوجيه والارشاد: {{$history->direct}}</h5>
                 </div>
-                <div class="col-md-4" style="overflow: hidden">
-                    <img style="width: 100%;height: 100%" src="{{asset('assets/images/education.jpg')}}">
+                <div class="col-md-4" style="border: 2px solid #84ba3f;overflow: hidden">
+                    <img style="width: 100%;height: 100%" src="{{asset('assets/images/education.jpg')}}" >
                 </div>
-                <div class="col-md-4" style="overflow: hidden">
-                    <img src="{{asset('assets/images/vison.png')}}" style="width: 100%;height: 100%">
+                <div class="col-md-4 image" style="border: 2px solid #84ba3f;overflow: hidden">
+                    <img style="margin-bottom: 20px;   width: 80%;  height: 70%;" src="{{asset('assets/images/vison.png')}}" >
+                    <h5 style="color: #ada9ae"> رقم التقرير :{{request()->id}} </h5>
+                    <h5 style="color: #ada9ae"> التاريخ: {{\Illuminate\Support\Facades\Date::today()->format("Y/m/d")}}</h5>
 
                 </div>
             </div>
@@ -66,7 +69,7 @@
 
 
                 <div class="col-md-2"
-                     style="background-color: #84ba3f;color: #ffffff;padding: 20px 10px;margin-bottom: 5px">تفاصيل
+                     style=" height:200px ;background-color: #84ba3f;color: #ffffff;padding: 20px 10px;margin-bottom: 5px">تفاصيل
                     البرنامج
                 </div>
                 <div class="col-md-10"
@@ -83,12 +86,15 @@
 
                             </span>
                 </div>
-                <div class="col-md-12 row">
+                <div class="col-md-12 row  program_images">
                     @foreach($programs->images as $img)
                         <div class="col-md-4">
-                            <img style="width: 400px;height: 400px" class="img-thumbnail"
-                                 src="{{asset('attachments/programs/'.$programs->name . '/'.$img->images)}}">
-
+                            <a href="{{asset('Attachments/programs/'.$programs->id . '/'.$img->images)}}">
+                                <img style="width: 400px;height: 400px"  class="img-fluid my-2 img-thumbnail"
+                                     src="{{asset('Attachments/programs/'.$programs->id . '/'.$img->images)}}">
+                            </a>
+{{--                            <img style="width: 400px;height: 400px" class="img-thumbnail"--}}
+{{--                                 src="{{asset('Attachments/programs/'.$programs->name . '/'.$img->images)}}">--}}
                         </div>
                     @endforeach
                 </div>
@@ -113,6 +119,17 @@
 
             initDefault();
 
+        });
+        $(function(){
+            $('.program_images').each(function() { // the containers for all your galleries
+                $(this).magnificPopup({
+                    delegate: 'a', // the selector for gallery item
+                    type: 'image',
+                    gallery: {
+                        enabled:true
+                    }
+                });
+            });
         });
 
         function initDefault() {

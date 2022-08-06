@@ -9,7 +9,7 @@ class RouteServiceProvider extends ServiceProvider
 {
 
     protected $namespace = 'App\Http\Controllers';
-    protected $dashboard_namespace = 'App\Http\Controllers\dashboard';
+    protected $frontend_namespace = 'App\Http\Controllers\frontend';
 
 
     public const HOME = '/';
@@ -27,7 +27,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
         $this->mapWebRoutes();
-        $this->mapDashboardRoutes();
+        $this->mapFrontendRoutes();
 
         //
     }
@@ -40,11 +40,11 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/web.php'));
     }
 
-    protected function mapDashboardRoutes()
+    protected function mapFrontendRoutes()
     {
         Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/dashboard/web.php'));
+            ->namespace($this->frontend_namespace)
+            ->group(base_path('routes/frontend/web.php'));
     }
 
     protected function mapApiRoutes()

@@ -11,7 +11,7 @@ use App\Models\Classroom;
 
 use App\Models\Classroom_sec;
 use App\Models\Grades\Grade;
-use App\Models\Student;
+use App\Models\History;use App\Models\Student;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -24,7 +24,10 @@ class ClassroomSecController extends Controller
 
         $My_Classes = Classroom_sec::all();
         $Grades = Grade::all();
-        return view('pages.My_Classes.My_Classes', compact('My_Classes', 'Grades'));
+         $histories = History::all();
+        foreach ( $histories as $history) {
+            return view('pages.My_Classes.My_Classes', compact('My_Classes', 'Grades','history'));
+        }
 
     }
 
@@ -129,8 +132,10 @@ class ClassroomSecController extends Controller
 
 
     public  function students($grade_id,$class_id){
-
-        return view('pages.Students.classrooms_import',compact(['grade_id','class_id']));
+     $histories = History::all();
+        foreach ( $histories as $history) {
+            return view('pages.Students.classrooms_import', compact(['grade_id', 'class_id','history']));
+        }
     }
 
     public  function importExcel(Request $request){
@@ -139,7 +144,10 @@ class ClassroomSecController extends Controller
         Excel::import(new StudentClassroomsImport(), $request->file);
 
         $students  = Student::all();
-        return view('pages.Students.index', compact('students'));
+         $histories = History::all();
+        foreach ( $histories as $history) {
+        return view('pages.Students.index', compact('students','history'));
+        }
     }
 }
 

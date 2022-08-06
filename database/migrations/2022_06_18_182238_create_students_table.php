@@ -23,7 +23,7 @@ class CreateStudentsTable extends Migration
             $table->string('neighsbor')->nullable();
             $table->string('neighbor_address')->nullable();
             $table->string('student_phone')->nullable();
-            $table->string('Id_Number')->unique()->nullable();
+            $table->string('Id_Number')->nullable();
             $table->bigInteger('Grade_id')->unsigned()->nullable();;
             $table->foreign('Grade_id')->references('id')->on('Grades')->onDelete('cascade');
             $table->bigInteger('blood_id')->unsigned()->nullable();

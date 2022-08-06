@@ -14981,7 +14981,7 @@ button.toast-close-button {
 
 /*# sourceMappingURL=bootstrap-datepicker.css.map */
 /*
-    Common 
+    Common
 */
 .wizard,
 .tabcontrol {
@@ -20688,7 +20688,7 @@ a.button-toggle-nav {
   background: transparent;
   color: #84ba3f; }
 
-/*dashboard 04*/
+/*frontend 04*/
 .admin-header.header-dark {
   background: #282a39;
   box-shadow: none; }
@@ -20860,7 +20860,7 @@ footer {
     line-height: 70px;
     color: rgba(255, 255, 255, 0.5); }
 
-/*dashboard 02*/
+/*frontend 02*/
 .active-user {
   padding: 0px 0px 30px 0; }
   .active-user span {

@@ -11,9 +11,9 @@
     @include('layouts.head')
 </head>
 
-<body style="max-width:1100px">
+<body style="" class="row">
 
-    <div class="wrapper">
+    <div class="wrapper col-12">
 
         <!--=================================
  preloader -->
@@ -32,7 +32,7 @@
         <!--=================================
  Main content -->
         <!-- main-content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper mx-auto-auto" >
 
             @yield('page-header')
 
@@ -42,7 +42,7 @@
  wrapper -->
 
             <!--=================================
- footer -->
+ flooter -->
 
 {{--            @include('layouts.footer')--}}
         </div><!-- main content wrapper end-->

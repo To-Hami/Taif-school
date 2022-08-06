@@ -2,7 +2,8 @@
 
 
 @section('title')
-    {{ trans('Grades_trans.title_page') }}
+    مدرستي
+
 @stop
 
 
@@ -175,8 +176,8 @@
 @endsection
 @section('js')
 
-    @toastr_js
-    @toastr_render
+{{--    @toastr_js--}}
+{{--    @toastr_render--}}
     <script>
         $(document).on('click', '.print_ptn', function () {
 

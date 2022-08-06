@@ -4,11 +4,14 @@ namespace App\Http\Controllers\programs;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\programsRequest;
+use App\Models\Attachment;
+use App\Models\History;
 use App\Models\Problem;
 use App\Models\Program;
 use App\Models\ProgramImage;
 use App\Models\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -17,14 +20,21 @@ class programsController extends Controller
     public function index()
     {
         $programs = Program::all();
-        return view('Pages.Programs.index', compact('programs'));
+
+        $histories = History::all();
+        foreach ( $histories as $history) {
+            return view('pages.Programs.index', compact('programs','history'));
+        }
     }
 
     public function create()
     {
 
         $program = '';
-        return view('Pages.Programs.add_program', compact('program'));
+        $histories = History::all();
+        foreach ( $histories as $history) {
+            return view('pages.Programs.add_program', compact('program','history'));
+        }
     }
 
     public function store(Request $request)
@@ -46,7 +56,7 @@ class programsController extends Controller
         if ($request->hasfile('images')) {
             foreach ($request->file('images') as $images) {
                 $name = $images->getClientOriginalName();
-                $images->storeAs('attachments/programs/' . $program->name, $images->getClientOriginalName(), 'upload_attachments');
+                $images->storeAs('Attachments/programs/' . $program->id, $images->getClientOriginalName(), 'upload_attachments');
                 //Image::make($name)->save(public_path('uploads/programs_images/' . $images->hashName()));
                 $images = new ProgramImage();
                 $images->images = $name;
@@ -73,8 +83,10 @@ class programsController extends Controller
             return isset($match[1])?$match[1]:null;
         }
         $programs = Program::where('id', $id)->first();
-
-        return view('Pages.Programs.edit_program', compact('programs'));
+        $histories = History::all();
+        foreach ( $histories as $history) {
+            return view('pages.Programs.edit_program', compact('programs','history'));
+        }
     }
 
     public function update(Request $request, $id)
@@ -95,7 +107,7 @@ class programsController extends Controller
         if ($request->hasfile('images')) {
             foreach ($request->file('images') as $images) {
                 $name = $images->getClientOriginalName();
-                $images->storeAs('attachments/programs/' . $progs->name, $images->getClientOriginalName(), 'upload_attachments');
+                $images->storeAs('Attachments/programs/' . $progs->id, $images->getClientOriginalName(), 'upload_attachments');
                 //Image::make($name)->save(public_path('uploads/programs_images/' . $images->hashName()));
                 $images = new ProgramImage();
                 $images->images = $name;
@@ -106,15 +118,20 @@ class programsController extends Controller
 
 
         $programs = Program::all();
-        return view('Pages.Programs.index', compact('programs'));
+        $histories = History::all();
+        foreach ( $histories as $history) {
+            return view('pages.Programs.index', compact('programs','history'));
+        }
     }
 
 
     public function destroy(request $request)
     {
-
+        $program =  Program::findOrFail($request->id);
+        File::deleteDirectory(public_path('Attachments/programs/'. $program->id));
         Program::findOrFail($request->id)->delete();
-        toastr()->error(trans('messages.Delete'));
+
+        toastr()->success(trans('messages.Delete'));
         return redirect()->route('programs.index');
 
     }
@@ -125,9 +142,13 @@ class programsController extends Controller
             preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match);
             return isset($match[1])?$match[1]:null;
         }
-        $programs = Program::where('id', $id)->first();
+        $histories = History::all();
+        foreach ( $histories as $history){
+            $programs = Program::where('id', $id)->first();
 
-        return view('Pages.Programs.show_program', compact('programs'));
+            return view('pages.Programs.show_program', compact('programs','history'));
+        }
+
 
     }
 

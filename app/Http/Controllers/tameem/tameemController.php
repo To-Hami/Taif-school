@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Maneger;
 use App\Models\Attachment;
 use App\Models\Book;
+use App\Models\History;
 use App\Models\Tameem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,19 +16,28 @@ class tameemController extends Controller
     public function index()
     {
         $tameems = Tameem::all();
-        return view('pages.tameem.index', compact('tameems'));
+        $histories = History::all();
+        foreach ( $histories as $history) {
+            return view('pages.tameem.index', compact('tameems','history'));
+        }
     }
 
     public function create()
     {
-        return view('pages.tameem.add_tameem');
+        $histories = History::all();
+        foreach ( $histories as $history) {
+            return view('pages.tameem.add_tameem',compact('history'));
+        }
     }
 
     public function edit(Request $request,$id)
     {
         $tameems = Tameem::whereId($id)->get();
-        foreach ($tameems as $tameem){
-             return view('pages.tameem.edit_tameem',compact('tameem'));
+        $histories = History::all();
+        foreach ( $histories as $history) {
+        foreach ($tameems as $tameem) {
+            return view('pages.tameem.edit_tameem', compact('tameem','history'));
+        }
 
         }
     }
@@ -101,7 +111,7 @@ class tameemController extends Controller
     {
 
         Tameem::findOrFail($request->id)->delete();
-        toastr()->error(trans('messages.Delete'));
+        toastr()->success(trans('messages.Delete'));
         return redirect()->route('tameem.index');
 
     }

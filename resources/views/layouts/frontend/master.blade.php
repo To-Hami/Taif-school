@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="utf-8" />
-    <title>KidKinder - Kindergarten Website Template</title>
+    <title>مدرستي</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="Free HTML Templates" name="keywords" />
     <meta content="Free HTML Templates" name="description" />
 
     <!-- Favicon -->
     <link href="{{asset('frontend/img/favicon.ico')}}" rel="icon" />
+    <script src="{{ asset('assets/frontend/css/magnific-popup.css') }}"></script>
+    <link rel="stylesheet" href="{{ asset('assets/frontend/css/magnific--popup.css') }}">
+    <script src="{{ asset('assets/frontend/js/jquery-ui.js') }}"></script>
+
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -46,6 +50,8 @@
     <!-- Libraries Stylesheet -->
     <link href="{{asset('assets/frontend/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/frontend/lib/lightbox/css/lightbox.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/css/plugins/font-awesome.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/frontend/css/font-awesome-rtl.min.css')}}" rel="stylesheet" />
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{asset('assets/frontend/css/style.css')}}" rel="stylesheet" />
 </head>
@@ -60,14 +66,18 @@
 <script src="{{asset('assets/frontend/lib/easing/easing.min.js')}}"></script>
 <script src="{{asset('assets/frontend/lib/owlcarousel/assets/owl.carousel.min.css')}}"></script>
 <script src="{{asset('assets/frontend/lib/isotope/isotope.pkgd.min.js')}}"></script>
+<script src="{{asset('assets/frontend/')}}"></script>
 
 <script src="{{asset('assets/frontend/lib/lightbox/js/lightbox.min.js')}}"></script>
 
 <!-- Contact Javascript File -->
 <script src="{{asset('assets/frontend/mail/jqBootstrapValidation.min.js')}}"></script>
 <script src="{{asset('assets/frontend/mail/contact.js')}}"></script>
+<script src="{{asset('assets/frontend/js/popper.min.js')}}"></script>
 
 <!-- Template Javascript -->
 <script src="{{asset('assets/frontend/js/main.js')}}"></script>
+<script src="{{asset('assets/frontend/js/jquery.magnific-popup.min.js')}}"></script>
+@stack('scripts');
 </body>
 </html>

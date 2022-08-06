@@ -10,4 +10,5 @@ class Respons extends Model
     use Notifiable;
 
     protected $guarded  = [];
+    protected $table = 'respons';
 }

@@ -19,34 +19,34 @@
         <div class="col-md-12 mb-30">
             <div class="card card-statistics h-100">
                 <div class="card-body">
-                    <div class="col-xl-12 mb-30">
-                        <div class="card card-statistics h-100">
+
                             <div class="card-body">
                                 @if (auth()->user()->hasPermission('edit_grades'))
 
-                                <a href="{{route('Students.create')}}" class="btn btn-success btn-lg" role="button"
-                                   aria-pressed="true">{{trans('main_trans.add_student')}}
-                                </a>
+                                    <a href="{{route('Students.create')}}" class="btn btn-success btn-lg my-2"
+                                       role="button"
+                                       aria-pressed="true">{{trans('main_trans.add_student')}}
+                                    </a>
                                 @endif
 
-                                    <form action="{{route('filter.classes')}}" method="POST" style="position: relative;left: 20px;float: left;margin-bottom: 10px">
-                                        {{csrf_field()}}
-                                        {{method_field('post')}}
-                                        <select class="selectpicker" data-style="btn-info" name="classroom_id" required="" onchange="this.form.submit()">
-                                            <option value="" selected="" disabled="">بحث باسم الصف</option>
-                                            <option value="1">الصف الاول</option>
-                                            <option value="2">الصف الثاني</option>
-                                            <option value="3">الصف الثالث</option>
-                                            <option value="4">الصف الرابع</option>
-                                            <option value="5">الصف الخامس</option>
-                                            <option value="6">الصف السادس</option>
-                                        </select>
-                                    </form>
+                                {{--                                    <form action="{{route('filter.classes')}}" method="POST" style="position: relative;left: 20px;float: left;margin-bottom: 10px">--}}
+                                {{--                                        {{csrf_field()}}--}}
+                                {{--                                        {{method_field('post')}}--}}
+                                {{--                                        <select class="selectpicker" data-style="btn-info" name="classroom_id" required="" onchange="this.form.submit()">--}}
+                                {{--                                            <option value="" selected="" disabled="">بحث باسم الصف</option>--}}
+                                {{--                                            <option value="1">الصف الاول</option>--}}
+                                {{--                                            <option value="2">الصف الثاني</option>--}}
+                                {{--                                            <option value="3">الصف الثالث</option>--}}
+                                {{--                                            <option value="4">الصف الرابع</option>--}}
+                                {{--                                            <option value="5">الصف الخامس</option>--}}
+                                {{--                                            <option value="6">الصف السادس</option>--}}
+                                {{--                                        </select>--}}
+                                {{--                                    </form>--}}
 
 
-{{--                                <a href="{{route('Students.import')}}" class="btn btn-success btn-lg" role="button"--}}
-{{--                                   aria-pressed="true">رفع ملف ايكسل</a>--}}
-{{--                                <br><br>--}}
+                                {{--                                <a href="{{route('Students.import')}}" class="btn btn-success btn-lg" role="button"--}}
+                                {{--                                   aria-pressed="true">رفع ملف ايكسل</a>--}}
+                                {{--                                <br><br>--}}
 
 
                                 <div class="table-responsive">
@@ -62,7 +62,7 @@
                                             <th>رقم الجوال</th>
                                             <th>{{trans('Students_trans.Grade')}}</th>
                                             <th>{{trans('Students_trans.classrooms')}}</th>
-{{--                                            <th>{{trans('Students_trans.section')}}</th>--}}
+                                            <th>{{trans('Students_trans.section')}}</th>
                                             <th>{{trans('Students_trans.Processes')}}</th>
                                         </tr>
                                         </thead>
@@ -76,7 +76,7 @@
                                                 <td>{{$student->student_phone}}</td>
                                                 <td>{{ $student->grade->Name ?? '---'  }}</td>
                                                 <td>{{$student->classroom->Name_Class ?? '---' }}</td>
-{{--                                                <td>{{$student->section->Name_Section ?? '---' }}</td>--}}
+                                                <td>{{$student->sub_classroom_id ?? '---' }}</td>
                                                 <td>
 
                                                     <div class="dropdown show">
@@ -90,19 +90,18 @@
                                                         </a>
                                                         @if (auth()->user()->hasPermission('edit_grades'))
 
-                                                        <a class="btn btn-outline-success btn-sm"
-                                                           href="{{route('Students.edit',$student->id)}}"
-                                                           role="button">
-                                                            <i class="fa fa-edit"></i>
-                                                        </a>
-                                                        <a class="btn btn-outline-danger btn-sm"
-                                                            data-target="#Delete_Student{{ $student->id }}"
-                                                             data-toggle="modal"
-                                                             href="##Delete_Student{{ $student->id }}"><i
-                                                                 class="fa fa-trash"></i>
-
-                                                        </a>
-                                                            @endif
+                                                            <a class="btn btn-outline-success btn-sm"
+                                                               href="{{route('Students.edit',$student->id)}}"
+                                                               role="button">
+                                                                <i class="fa fa-edit"></i>
+                                                            </a>
+                                                            <a class="btn btn-outline-danger btn-sm"
+                                                               data-target="#Delete_Student{{ $student->id }}"
+                                                               data-toggle="modal"
+                                                               href="##Delete_Student{{ $student->id }}"><i
+                                                                    class="fa fa-trash"></i>
+                                                            </a>
+                                                        @endif
 
                                                     </div>
 
@@ -115,13 +114,34 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+
         </div>
     </div>
     <!-- row closed -->
 @endsection
 @section('js')
-    @toastr_js
-    @toastr_render
+
+    <script>
+        $(document).ready(function() {
+            $('#datatable_filter input').attr("placeholder", "......search........");
+
+
+            //datatable_filter
+            // datatable_wrapper
+            //dataTable
+
+            $('#datatable_filter').dataTable( {
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search ......",
+                    sSearchPlaceholder: "Search ......",
+                    placeholder: "Search ......",
+                }
+
+
+
+        } );
+
+        } );
+    </script>
 @endsection

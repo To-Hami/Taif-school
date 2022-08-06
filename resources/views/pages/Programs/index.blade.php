@@ -19,8 +19,7 @@
         <div class="col-md-12 mb-30">
             <div class="card card-statistics h-100">
                 <div class="card-body">
-                    <div class="col-xl-12 mb-30">
-                        <div class="card card-statistics h-100">
+
                             <div class="card-body">
                                 @if (auth()->user()->hasPermission('edit_grades'))
 
@@ -52,20 +51,7 @@
                                                 <td>{{$program->date}}</td>
 
                                                 <td>
-                                                    <div class="dropdown show">
-                                                        <a href="{{route('programs.show',$program->id)}}">
-                                                            <i style="    display: inline;
-                                                                   color: #17a2b8;
-                                                                    width: 10px;
-                                                                    height: 10px;
-                                                                    border: 2px solid #17a2b8;
-                                                                    padding: 6px;
-
-                                                                    border-radius: 5px;" class="fa fa-eye"></i>
-                                                            <input type="hidden" name="id" value="{{$program->id}}">
-
-                                                        </a>
-                                                        @if (auth()->user()->hasPermission('edit_grades'))
+                                                    @if (auth()->user()->hasPermission('edit_grades'))
 
                                                         <a data-target="#Delete_Student{{ $program->id }}"
                                                            data-toggle="modal"
@@ -78,9 +64,11 @@
 
                                                                 border-radius: 5px;" class="fa fa-trash"></i>
                                                         </a>
-                                                        @endif
-                                                        <a href="{{route('programs.edit',$program->id)}}">
-                                                            <i style="    display: inline;
+                                                    @endif
+                                                    @if (auth()->user()->hasPermission('edit_grades'))
+
+                                                    <a href="{{route('programs.edit',$program->id)}}">
+                                                        <i style="    display: inline;
                                                                    color: #17a2b8;
                                                                     width: 10px;
                                                                     height: 10px;
@@ -88,11 +76,26 @@
                                                                     padding: 6px;
 
                                                                     border-radius: 5px;" class="fa fa-edit"></i>
+                                                        <input type="hidden" name="id" value="{{$program->id}}">
+
+                                                    </a>
+                                                    @endif
+                                                        <a href="{{route('programs.show',$program->id)}}">
+                                                            <i style="    display: inline;
+                                                                   color: #17a2b8;
+                                                                    width: 10px;
+                                                                    height: 10px;
+                                                                    border: 2px solid #17a2b8;
+                                                                    padding: 6px;
+
+                                                                    border-radius: 5px;" class="fa fa-eye"></i>
                                                             <input type="hidden" name="id" value="{{$program->id}}">
 
                                                         </a>
 
-                                                    </div>
+
+
+
                                                 </td>
                                             </tr>
                                             <!-- Deleted inFormation Student -->
@@ -116,6 +119,7 @@
                                                                 @method('DELETE')
 
                                                                 <input type="hidden" name="id" value="{{$program->id}}">
+                                                                <input type="text" class="form-control" name="id" value="{{$program->name}}">
 
 
                                                                 <div class="modal-footer">
@@ -138,8 +142,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+
     <!-- row closed -->
 @endsection
 @section('js')

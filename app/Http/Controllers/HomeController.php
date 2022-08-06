@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Maneger;
 use App\Models\Book;
+use App\Models\History;
 use App\Models\Program;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -25,8 +26,13 @@ class HomeController extends Controller
         $manger = Maneger::all();
         $Books = Book::all();
         $programs = Program::all();
-
+        $histories = History::all();
         $student_problems = Student::whereHas('problems')->get();
-        return view('dashboard',compact('studants','teachers','Books','programs','student_problems','manger'));
+        foreach ( $histories as $history){
+            return view('dashboard',compact('studants','teachers','Books','programs','student_problems','manger','history'));
+
+        }
+
+
     }
 }

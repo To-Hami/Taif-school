@@ -4,9 +4,17 @@ namespace App\Http\Controllers\Students;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreStudentsRequest;
 use App\Imports\StudantImport;
+use App\Models\Classroom;
+use App\Models\Gender;
+use App\Models\Grades\Grade;
+use App\Models\History;
 use App\Models\Level;
+use App\Models\My_Parent;
+use App\Models\Nationalitie;
 use App\Models\Problem;
 use App\Models\Student;
+use App\Models\Type_Blood;
+use App\Models\Year;
 use App\Repository\StudentRepositoryInterface;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -46,9 +54,26 @@ class StudentController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit($id )
     {
-        return $this->Student->Edit_Student($id);
+        $data['my_classes'] = Classroom::all();
+//        $data['my_sections'] = Section::all();
+        $data['Grades'] = Grade::all();
+        $data['Years'] = Year::all();
+        $data['parents'] = My_Parent::all();
+        $data['Genders'] = Gender::all();
+        $data['nationals'] = Nationalitie::all();
+        $data['bloods'] = Type_Blood::all();
+          $Studentss  = Student::findOrFail(['id' => $id]);
+
+        foreach ( $Studentss as $Students){
+            $histories = History::all();
+            foreach ( $histories as $history) {
+                return view('pages.Students.edit', $data, compact('Students','history'));
+            }
+
+        }
+
     }
 
 
@@ -97,8 +122,12 @@ class StudentController extends Controller
     {
         $student = Student::findOrFail($id);
         $levels = Level::all();
+        $histories = History::all();
+        foreach ( $histories as $history){
+
+        }
         $problems = Problem::all();
-        return view('pages.Students.problems', compact('student', 'levels', 'problems'));
+        return view('pages.Students.problems', compact('student', 'levels', 'problems','history'));
     }
 
 
@@ -113,7 +142,12 @@ class StudentController extends Controller
         $students->save();
 
         $students = Student::all();
-        return view('pages.Students.index', compact('students'));
+
+        $histories = History::all();
+        foreach ( $histories as $history) {
+        return view('pages.Students.index', compact('students','history'));
+        }
+
     }
 
     /************************** import Excel   ******************************/

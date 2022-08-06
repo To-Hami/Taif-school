@@ -20,8 +20,7 @@
             <div class="card card-statistics h-100">
                 <div class="card-body">
                     <div class="col-xl-12 mb-30">
-                        <div class="card card-statistics h-100">
-                            <div class="card-body">
+
 
                                 <a href="{{route('manger.create')}}" class="btn btn-success btn-lg" role="button"
                                    aria-pressed="true">
@@ -126,11 +125,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+
     <!-- row closed -->
 @endsection
 @section('js')
-    @toastr_js
-    @toastr_render
+
 @endsection

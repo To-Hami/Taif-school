@@ -10,6 +10,7 @@
 <!--- Style css -->
 <link href="{{ URL::asset('assets/css/style.css') }}" rel="stylesheet">
 <link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('assets/css/magnific-popup.css') }}" rel="stylesheet">
 <link href="{{ URL::asset('assets/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
 
 
@@ -30,6 +31,9 @@
 <link href="{{ URL::asset('assets/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
 @yield('css')
 <link href="{{ URL::asset('assets/css/style.css') }}" rel="stylesheet">
+<script src="{{ asset('assets/frontend/css/magnific-popup.css') }}"></script>
+<link rel="stylesheet" href="{{ asset('assets/frontend/css/magnific--popup.css') }}">
+<script src="{{ asset('assets/frontend/js/jquery-ui.js') }}"></script>
 
 <style>
     body, h1, h2, h3, h4, h5, h6 {

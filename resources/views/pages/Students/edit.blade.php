@@ -125,64 +125,63 @@
                         </div>
 
 
-                <h6 style="font-family: 'Cairo', sans-serif;color: blue">{{trans('Students_trans.Student_information')}}</h6>
-                <br>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="Grade_id">{{trans('Students_trans.Grade')}} : <span class="text-danger">*</span></label>
-                            <select class="custom-select mr-sm-2 form-control" name="Grade_id" style="height: 50px">
-                                <option selected disabled>{{trans('Parent_trans.Choose')}}...</option>
-                                @foreach($Grades as $Grade)
-                                    <option
-                                        value="{{ $Grade->id }}" {{$Grade->id == $Students->Grade_id ? 'selected' : ""}}>{{ $Grade->Name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="Classroom_id">{{trans('Students_trans.classrooms')}} : <span
-                                    class="text-danger">*</span></label>
-                            <select class="custom-select mr-sm-2 form-control" name="Classroom_id" style="height: 50px">
-                                <option selected disabled>{{trans('Parent_trans.Choose')}}...</option>
+                        <h6 style="font-family: 'Cairo', sans-serif;color: blue">{{trans('Students_trans.Student_information')}}</h6>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="Grade_id">{{trans('Students_trans.Grade')}} : <span class="text-danger">*</span></label>
+                                    <select class="custom-select mr-sm-2 form-control" name="Grade_id"
+                                            style="height: 50px">
+                                        <option selected disabled>{{trans('Parent_trans.Choose')}}...</option>
+                                        @foreach($Grades as $Grade)
+                                            <option
+                                                value="{{ $Grade->id }}" {{$Grade->id == $Students->Grade_id ? 'selected' : ""}}>{{ $Grade->Name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="Classroom_id">{{trans('Students_trans.classrooms')}} :
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select class="custom-select mr-sm-2 form-control" name="Classroom_id"  style="height: 50px">
+                                        @foreach($my_classes as $class)
+                                            <option value="{{ $class->id }}" {{$class->id == $Students-> sub_classroom_id ? 'selected' : ''}}  >{{ $class->Name_Class }}</option>
 
-                                @foreach($my_classes as $class)
-                                    <option value="{{ $class->id }}">{{ $class->Name_Class }}</option>
+                                        @endforeach
 
-                                @endforeach
-                            </select>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="academic_year">{{trans('Students_trans.academic_year')}} : <span
+                                            class="text-danger">*</span></label>
+                                    <select class="custom-select mr-sm-2 form-control" name="academic_year"
+                                            style="height: 50px">
+                                        <option selected disabled>{{trans('Parent_trans.Choose')}}...</option>
+
+                                        @foreach($Years as $Year)
+                                            <option value="{{ $Year->id}}">{{ $Year->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="academic_year">{{trans('Students_trans.academic_year')}} : <span
-                                    class="text-danger">*</span></label>
-                            <select class="custom-select mr-sm-2 form-control" name="academic_year"
-                                    style="height: 50px">
-                                <option selected disabled>{{trans('Parent_trans.Choose')}}...</option>
-                                @php
-                                    $current_year = date("Y");
-                                @endphp
-                                @for($year=$current_year; $year<=$current_year +1 ;$year++)
-                                    <option
-                                        value="{{ $year}}" {{$year == $Students->academic_year ? 'selected' : ' '}}>{{ $year }}</option>
-                                @endfor
-                            </select>
-                        </div>
-                    </div>
+                        <button class="btn btn-success btn-lg nextBtn btn-lg pull-right"
+                                type="submit">{{trans('Students_trans.submit')}}
+                        </button>
+                        <br>
+
+                    </form>
 
                 </div>
-                <button class="btn btn-success btn-lg nextBtn btn-lg pull-right"
-                        type="submit">{{trans('Students_trans.submit')}}
-                </button>
-                <br>
-
-                </form>
-
             </div>
         </div>
-    </div>
     </div>
     <!-- row closed -->
 @endsection

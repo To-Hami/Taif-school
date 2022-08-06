@@ -45,12 +45,17 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => storage_path('app/public'),
         ],
 
-        'parent_attachments' => [
+        'local_Attachments' => [
             'driver' => 'local',
-            'root' => storage_path('app/parent_attachments'),
+            'root' => public_path('app/public/Attachments/'),
+        ],
+
+        'parent_Attachments' => [
+            'driver' => 'local',
+            'root' => storage_path('app/parent_Attachments'),
         ],
         'upload_attachments' => [
             'driver' => 'local',
@@ -62,14 +67,36 @@ return [
             'driver' => 'local',
             'root' => public_path('Attachments/books'),
         ],
+
+        'public_uploads_setting_ershad' => [
+            'driver' => 'local',
+            'root' => public_path('Attachments/setting/ershad'),
+        ],
+
+
+        'public_uploads_setting_slook' => [
+            'driver' => 'local',
+            'root' => public_path('Attachments/setting/slook'),
+        ],
+
+        'public_uploads_setting_adds' => [
+            'driver' => 'local',
+            'root' => public_path('Attachments/setting/adds'),
+        ],
+
+        'public_adds' => [
+            'driver' => 'local',
+            'root' => public_path('/'),
+            'url' => env('APP_URL').'/storage',
+        ],
         'public_uploads_notes' => [
             'driver' => 'local',
-            'root' => public_path('Attachments\Notes'),
+            'root' => public_path('Attachments/Notes'),
         ],
 
         'public_uploads_tameem' => [
             'driver' => 'local',
-            'root' => public_path('Attachments\Tameem'),
+            'root' => public_path('Attachments/Tameem'),
         ],
 
         'public' => [

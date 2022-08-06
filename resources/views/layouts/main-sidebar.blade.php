@@ -7,7 +7,7 @@
                     <!-- menu item Dashboard-->
 
                     <li>
-                        <a href="{{route('dashboard')}}">
+                        <a href="{{route('frontend')}}">
                             <div class="pull-left"><i class="ti-home"></i><span
                                     class="right-nav-text">@lang('main_trans.Dashboard')</span>
                             </div>

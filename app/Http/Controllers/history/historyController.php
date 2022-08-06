@@ -3,22 +3,26 @@
 namespace App\Http\Controllers\history;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attachment;
+use App\Models\Book;
 use App\Models\Grades\Grade;
 use App\Models\History;
+use App\Models\ProgramImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class historyController extends Controller
 {
     public function index()
     {
         $history = History::get()->first();
-        return view('Pages.history.index', compact('history'));
+        return view('pages.history.index', compact('history'));
     }
 
     public function create()
     {
         $grades = Grade::all();
-        return view('Pages.history.add_history', compact('grades'));
+        return view('pages.history.add_history', compact('grades'));
     }
 
 
@@ -26,20 +30,76 @@ class historyController extends Controller
     {
 
         $history = History::where('id', $id)->first();
+
+
+        /************************  slook   ******************************/
+
+
+        if ($request->hasFile('attachment_slook')) {
+//
+//
+            Storage::disk('public_uploads_setting_slook')->delete('/' . $history->attachment_slook);
+
+            $TheFile = $request->attachment_slook->getClientOriginalName();
+            $request->attachment_slook->move(public_path('/Attachments/setting/slook/'), $TheFile);
+
+            $attachment_slook = $request->file('attachment_slook');
+            $file_attachment_slook = $attachment_slook->getClientOriginalName();
+            $history->attachment_slook = $file_attachment_slook;
+            $history->save();
+
+        }
+
+        /***********************  ershad   *************************************/
+
+        if ($request->hasFile('attachment_ershad')) {
+
+            Storage::disk('public_uploads_setting_ershad')->delete('/' . $history->attachment_ershad);
+
+            $TheFile = $request->attachment_ershad->getClientOriginalName();
+            $request->attachment_ershad->move(public_path('Attachments/setting/ershad'), $TheFile);
+
+            $attachment_ershad = $request->file('attachment_ershad');
+            $file_attachment_ershad = $attachment_ershad->getClientOriginalName();
+
+            $history->attachment_ershad = $file_attachment_ershad;
+            $history->save();
+
+        }
+
+
+
+        /********************  adds  ******************************/
+
+        if ($request->hasFile('adds')) {
+
+            Storage::disk('public_uploads_setting_adds')->delete('/' . $history->adds);
+
+            $TheFile = $request->adds->getClientOriginalName();
+            $request->adds->move(public_path('Attachments/setting/adds'), $TheFile);
+
+            $history->adds = $request->adds->getClientOriginalName();
+            $history->save();
+        }
+
+
         $history->name = $request->name;
-//        $history->history = $request->history;
         $history->grade = $request->grade;
         $history->manager_name = $request->manager_name;
         $history->manager_email = $request->manager_email;
         $history->number = $request->number;
+        $history->region = $request->region;
+        $history->direct = $request->direct;
         $history->location = $request->address;
+
+
         $history->save();
 
-
-        return view('Pages.history.index', compact('history'));
+        toastr()->success(trans('messages.success'));
+        return view('pages.history.index', compact('history'));
     }
 
-//    public function create()
+//    public function create    ()
 //    {
 //
 //        $program = '';
@@ -65,7 +125,7 @@ class historyController extends Controller
 //        if ($request->hasfile('images')) {
 //            foreach ($request->file('images') as $images) {
 //                $name = $images->getClientOriginalName();
-//                $images->storeAs('attachments/programs/' . $program->name, $images->getClientOriginalName(), 'upload_attachments');
+//                $images->storeAs('Attachments/programs/' . $program->name, $images->getClientOriginalName(), 'upload_attachments');
 //                //Image::make($name)->save(public_path('uploads/programs_images/' . $images->hashName()));
 //                $images = new ProgramImage();
 //                $images->images = $name;
@@ -114,7 +174,7 @@ class historyController extends Controller
 //        if ($request->hasfile('images')) {
 //            foreach ($request->file('images') as $images) {
 //                $name = $images->getClientOriginalName();
-//                $images->storeAs('attachments/programs/' . $progs->name, $images->getClientOriginalName(), 'upload_attachments');
+//                $images->storeAs('Attachments/programs/' . $progs->name, $images->getClientOriginalName(), 'upload_attachments');
 //                //Image::make($name)->save(public_path('uploads/programs_images/' . $images->hashName()));
 //                $images = new ProgramImage();
 //                $images->images = $name;

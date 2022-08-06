@@ -70,7 +70,7 @@
                                 @foreach($book->images as $img)
                                     <div class="col-md-4">
                                         <img style="width: 400px;height: 400px" class="img-thumbnail"
-                                             src="{{asset('attachments/books/images/'.$book->name . '/'.$img->images)}}">
+                                             src="{{asset('Attachments/books/images/'.$book->id. '/'.$img->images)}}">
 
                                     </div>
                                 @endforeach

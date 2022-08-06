@@ -36,8 +36,17 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>اختر ملف الاكسيل : <span class="text-danger">*</span></label>
-                                    <input  type="file" name="file"  class="form-control">
+                                    <label> ملف الاكسيل يجب ان يكون من موقع نور من ايقونة التقارير تقارير الطلاب كشف الطلاب  : <span class="text-danger">*</span></label>
+                                    <div style="width: 500px;height: 40px;background-color: #f2f2f2;color: #0b0b0b;
+                                        border: 1px solid #17a2b8;position: relative;z-index: 1;border-radius: 20px ">
+                                        <span style="position:absolute;display: block;margin: 5px 10px 0 0 ">
+                                            أضغط لرفع ملف الطلاب
+                                            <i class="fa fa-file-archive-o"></i>
+                                        </span>
+                                        <input style="width: 100%;height: 100%;opacity: 0"
+                                               type="file" name="file"  class="form-control">
+                                    </div>
+
                                     <input  type="hidden" name="id" value="{{$grade_id}}" class="form-control">
                                     <input  type="hidden" name="id" value="{{$class_id}}" class="form-control">
                                 </div>

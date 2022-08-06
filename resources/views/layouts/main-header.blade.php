@@ -3,8 +3,13 @@
 <nav class="admin-header navbar navbar-default col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <!-- logo -->
     <div class="text-left navbar-brand-wrapper">
-        <a class="navbar-brand brand-logo" href="#"><img src="{{asset('assets/images/logo-dark.png')}}" alt=""></a>
-
+        <a
+            href="{{route('home')}}"
+            class="navbar-brand font-weight-bold text-secondary"
+            style="font-size: 30px"
+        >
+            <span class="text-primary">{{$history->name}}</span>
+        </a>
     </div>
     <!-- Top bar left -->
     <ul class="nav navbar-nav mr-auto">

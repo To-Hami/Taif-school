@@ -20,8 +20,7 @@
             <div class="card card-statistics h-100">
                 <div class="card-body">
                     <div class="col-xl-12 mb-30">
-                        <div class="card card-statistics h-100">
-                            <div class="card-body">
+
 
                                 <a href="{{route('books.create')}}" class="btn btn-success btn-lg" role="button"
                                    aria-pressed="true">اضافة مرجع : </a><br><br>
@@ -50,21 +49,28 @@
                                                 <td>
                                                     <div class="dropdown show">
 
-                                                            <a class="btn btn-outline-success btn-sm"
-                                                               href="{{route('books.edit',$book->id)}}"
-                                                               role="button"><i class="fa fa-edit"></i>&nbsp;
-                                                                تعديل</a>
+
 
                                                         <a class="btn btn-outline-success btn-sm"
                                                                href="{{route('books.view',$book->id)}}"
-                                                               role="button"><i class="fa fa-eye"></i>&nbsp;
-                                                                عرض</a>
+                                                           target="_blank"
+                                                               role="button"><i class="fa fa-file-pdf-o"></i>&nbsp;
+                                                                المرجع</a>
+                                                        <a class="btn btn-outline-success btn-sm"
+                                                           href="{{route('books.showImage',$book->id)}}"
+                                                           target="_blank"
+                                                           role="button"><i class="fa fa-eye"></i>&nbsp;
+                                                            الصورة</a>
 
                                                             <a class="btn btn-outline-info btn-sm"
                                                                href="{{route('books.download',$book->id)}}"
                                                                role="button"><i
                                                                     class="fa fa-download"></i>&nbsp;
                                                                 تحميل</a>
+                                                        <a class="btn btn-outline-success btn-sm"
+                                                           href="{{route('books.edit',$book->id)}}"
+                                                           role="button"><i class="fa fa-edit"></i>&nbsp;
+                                                            تعديل</a>
 
                                                         <a data-target="#Delete_Student{{ $book->id }}"
                                                            class="btn btn-outline-danger btn-sm"
@@ -99,6 +105,7 @@
                                                                 @method('DELETE')
 
                                                                 <input type="hidden" name="id" value="{{$book->id}}">
+                                                                <input type="text" class="form-control" name="id" value="{{$book->name}}">
 
 
                                                                 <div class="modal-footer">
@@ -121,11 +128,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+
     <!-- row closed -->
 @endsection
 @section('js')
-    @toastr_js
-    @toastr_render
+
 @endsection

@@ -144,15 +144,18 @@
 
                                     </div>
                                 @endif
-                                    <div class="col-md-12 row">
-                                        @foreach($programs->images as $img)
-                                            <div class="col-md-4">
-                                                <img style="width: 400px;height: 400px" class="img-thumbnail"
-                                                     src="{{asset('attachments/programs/'.$programs->name . '/'.$img->images)}}">
-
-                                            </div>
-                                        @endforeach
-                                    </div>
+                                <div class="col-md-12 row  program_images">
+                                    @foreach($programs->images as $img)
+                                        <div class="col-md-4">
+                                            <a href="{{asset('Attachments/programs/'.$programs->id . '/'.$img->images)}}">
+                                                <img style="width: 400px;height: 400px"  class="img-fluid my-2 img-thumbnail"
+                                                     src="{{asset('Attachments/programs/'.$programs->id . '/'.$img->images)}}">
+                                            </a>
+                                            {{--                            <img style="width: 400px;height: 400px" class="img-thumbnail"--}}
+                                            {{--                                 src="{{asset('Attachments/programs/'.$programs->name . '/'.$img->images)}}">--}}
+                                        </div>
+                                    @endforeach
+                                </div>
 
 
                                 <button style="margin-top: 100px"
@@ -175,6 +178,17 @@
 
                     initDefault();
 
+                });
+                $(function(){
+                    $('.program_images').each(function() { // the containers for all your galleries
+                        $(this).magnificPopup({
+                            delegate: 'a', // the selector for gallery item
+                            type: 'image',
+                            gallery: {
+                                enabled:true
+                            }
+                        });
+                    });
                 });
 
                 function initDefault() {

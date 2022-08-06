@@ -18,7 +18,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 Auth::routes(['verify'=>true]);
 Route::group([ 'middleware' =>'auth'],function(){
 
-    Route::get('/','HomeController@index')->name('dashboard');
+    Route::get('/','HomeController@index')->name('frontend');
 
 
 /*********************  grades ********************************/
@@ -160,6 +160,7 @@ Route::group([ 'middleware' =>'auth'],function(){
     Route::group(['namespace' => 'books'], function () {
         Route::resource('books', 'booksController');
         Route::get('books/view/{id}', 'booksController@view')->name('books.view');
+        Route::get('books/image/{id}', 'booksController@showImage')->name('books.showImage');
         Route::get('books/download/{id}', 'booksController@download')->name('books.download');
 
 

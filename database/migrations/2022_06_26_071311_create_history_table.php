@@ -17,8 +17,13 @@ class CreateHistoryTable extends Migration
             $table->string('manager_email')->nullable();
             $table->string('number')->nullable();
             $table->string('history')->nullable();
+            $table->string('direct')->nullable();
+            $table->string('region')->nullable();
             $table->string('grade')->nullable();
             $table->string('location')->nullable();
+            $table->string('attachment_ershad')->nullable();
+            $table->string('attachment_slook')->nullable();
+            $table->string('adds')->nullable();
             $table->timestamps();
         });
     }

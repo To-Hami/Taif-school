@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Maneger;
 use App\Models\Attachment;
 use App\Models\Book;
+use App\Models\History;
 use App\Notifications\details;
 use App\Respons;
 use App\User;
@@ -18,19 +19,28 @@ class mangerController extends Controller
     public function index()
     {
         $Notes = Maneger::all();
-        return view('pages.manegers.index', compact('Notes'));
+        $histories = History::all();
+        foreach ( $histories as $history) {
+            return view('pages.manegers.index', compact('Notes','history'));
+        }
     }
 
     public function create()
     {
-        return view('pages.manegers.add_notes');
+        $histories = History::all();
+        foreach ( $histories as $history) {
+            return view('pages.manegers.add_notes',compact('history'));
+        }
     }
 
     public function edit(Request $request,$id)
     {
         $notes = Maneger::whereId($id)->get();
-        foreach ($notes as $note){
-             return view('pages.manegers.edit_notes',compact('note'));
+        $histories = History::all();
+        foreach ( $histories as $history) {
+        foreach ($notes as $note) {
+            return view('pages.manegers.edit_notes', compact('note','history'));
+        }
 
         }
     }
@@ -104,7 +114,7 @@ class mangerController extends Controller
     {
 
         Maneger::findOrFail($request->id)->delete();
-        toastr()->error(trans('messages.Delete'));
+        toastr()->success(trans('messages.Delete'));
         return redirect()->route('manger.index');
 
     }
@@ -113,7 +123,10 @@ class mangerController extends Controller
 /******************************   email   *****************************/
 
     public function send( ){
-        return view('pages.manegers.mail');
+        $histories = History::all();
+        foreach ( $histories as $history) {
+            return view('pages.manegers.mail',compact('history'));
+        }
     }
 
 

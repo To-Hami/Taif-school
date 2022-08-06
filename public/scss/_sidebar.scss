@@ -511,7 +511,7 @@
 
       }
 
-     
+
 
       a.active-page {
         background: rgba(0, 0, 0, 0.2);
@@ -549,7 +549,7 @@
 
     }
 
-  li.active { 
+  li.active {
      a {
         .pull-right {
           i {
@@ -812,7 +812,7 @@ a.button-toggle-nav {
       display: none;
     }
 
-    &:hover { 
+    &:hover {
       .menu-title {
         @include transition (all, 0s, ease);
         opacity: 1;
@@ -839,7 +839,7 @@ a.button-toggle-nav {
       a {
         color: rgba(0, 0, 0, 0.9);
       }
-    
+
       ul {
         li {
           a {
@@ -889,7 +889,7 @@ a.button-toggle-nav {
           background: transparent;
           color: $theme-color;
 
-          i { 
+          i {
                color: $theme-color;
            }
         }
@@ -900,20 +900,20 @@ a.button-toggle-nav {
         &:focus {
           background: transparent;
           color: $theme-color;
-          i { 
+          i {
                color: $theme-color;
            }
         }
         &:active {
           background: transparent;
           color: $theme-color;
-          i { 
+          i {
                color: $theme-color;
            }
         }
       }
 
-     
+
 
       ul {
         li {
@@ -943,18 +943,18 @@ a.button-toggle-nav {
       }
 
     }
-  li.active {  
+  li.active {
     > a {
         background: transparent;
         color:$theme-color;
         .pull-right {
-         i { 
+         i {
                color: $theme-color;
            }
 
         }
         .pull-left {
-          i { 
+          i {
                color: $theme-color;
            }
         }
@@ -993,7 +993,7 @@ a.button-toggle-nav {
 
 }
 
-/*dashboard 04*/
+/*frontend 04*/
 .admin-header.header-dark {
   background: $sidebar-dark;
   box-shadow: none;
@@ -1031,10 +1031,10 @@ a.button-toggle-nav {
 
     }
 
-    .info-drop { 
-     .dropdown-item { 
+    .info-drop {
+     .dropdown-item {
        padding: .5rem 1.5rem;
-     } 
+     }
     }
 
   }

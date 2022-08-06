@@ -34,14 +34,18 @@
                                 <div class="col-md-4">
                                     <h5>المملكة العربية السعودية </h5>
                                     <h5>وزارة التعليم </h5>
-                                    <h5>ادارة التعليم بالطائف </h5>
-                                    <h5>التوجيه والارشاد</h5>
+                                    <h5>ادارة التعليم {{$history->region}} </h5>
+                                    <h5>مدرسة: {{$history->name}}  </h5>
+                                    <h5> المدير :{{$history->manager_name}} </h5>
+                                    <h5>التوجيه والارشاد: {{$history->direct}}</h5>
                                 </div>
                                 <div class="col-md-4" style="overflow: hidden">
-                                    <img style="width: 100%;height: 100%" src="{{asset('assets/images/education.jpg')}}">
+                                    <img style="width: 100%;height: 100%" src="{{asset('assets/images/education.jpg')}}" >
                                 </div>
-                                <div class="col-md-4" style="overflow: hidden">
-                                    <img src="{{asset('assets/images/vison.png')}}" style="width: 100%;height: 100%">
+                                <div class="col-md-4 image" style="overflow: hidden">
+                                    <img style="   width: 80%;  height: 70%;" src="{{asset('assets/images/vison.png')}}" >
+                                    <h5> رقم التقرير :{{request()->id}} </h5>
+                                    <h5> التاريخ: {{\Illuminate\Support\Facades\Date::today()->format("Y/m/d")}}</h5>
 
                                 </div>
                             </div>
@@ -64,7 +68,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>{{trans('Students_trans.Date_of_Birth')}} :</label>
-                                            <input class="form-control hijri-picker" value="{{$student->Date_Birth}}"
+                                            <input class="form-control" value="{{$student->Date_Birth}}"
                                                    type="text" name="Date_Birth" data-date-format="yyyy-mm-dd">
                                         </div>
                                     </div>

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Models\Classroom;
 use App\Models\Gender;
 use App\Models\Grades\Grade;
+use App\Models\History;
 use App\Models\Image;
 use App\Models\My_Parent;
 use App\Models\Nationalitie;
@@ -12,6 +13,7 @@ use App\Models\Section;
 use App\Models\Student;
 use App\Models\Type_Blood;
 use App\Models\Year;
+use http\Env\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +26,10 @@ class StudentRepository implements StudentRepositoryInterface
     public function Get_Student()
     {
         $students = Student::all();
-        return view('pages.Students.index', compact('students'));
+        $histories = History::all();
+        foreach ( $histories as $history) {
+            return view('pages.Students.index', compact('students','history'));
+        }
     }
 /*************************************   index   *******************************************/
     public function index()
@@ -79,7 +84,7 @@ class StudentRepository implements StudentRepositoryInterface
             if ($request->hasfile('photos')) {
                 foreach ($request->file('photos') as $file) {
                     $name = $file->getClientOriginalName();
-                    $file->storeAs('attachments/students/' . $students->name, $file->getClientOriginalName(), 'upload_attachments');
+                    $file->storeAs('Attachments/students/' . $students->name, $file->getClientOriginalName(), 'upload_attachments');
 
                     // insert in image_table
                     $images = new Image();
@@ -102,8 +107,9 @@ class StudentRepository implements StudentRepositoryInterface
 
     /********************************************  edit    *******************************************/
 
-    public function Edit_Student($id)
+    public function Edit_Student($request)
     {
+        return $request;
         $data['my_classes'] = Classroom::all();
 //        $data['my_sections'] = Section::all();
         $data['Grades'] = Grade::all();
@@ -112,7 +118,7 @@ class StudentRepository implements StudentRepositoryInterface
         $data['Genders'] = Gender::all();
         $data['nationals'] = Nationalitie::all();
         $data['bloods'] = Type_Blood::all();
-        $Students  = Student::findOrFail($id);
+        $Students  = Student::findOrFail($request->id);
         return view('pages.Students.edit', $data, compact('Students'));
     }
 
@@ -147,7 +153,7 @@ class StudentRepository implements StudentRepositoryInterface
             toastr()->success(trans('messages.Update'));
             return redirect()->route('Students.index');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            return redirect()->back()->with(['success' => $e->getMessage()]);
         }
     }
 
@@ -185,7 +191,7 @@ class StudentRepository implements StudentRepositoryInterface
     {
 
         Student::destroy($request->id);
-        toastr()->error(trans('messages.Delete'));
+        toastr()->success(trans('messages.Delete'));
         return redirect()->route('Students.index');
     }
 
@@ -196,7 +202,7 @@ class StudentRepository implements StudentRepositoryInterface
     {
         foreach ($request->file('photos') as $file) {
             $name = $file->getClientOriginalName();
-            $file->storeAs('attachments/students/' . $request->student_name, $file->getClientOriginalName(), 'upload_attachments');
+            $file->storeAs('Attachments/students/' . $request->student_name, $file->getClientOriginalName(), 'upload_attachments');
 
             // insert in image_table
             $images = new image();
@@ -213,7 +219,7 @@ class StudentRepository implements StudentRepositoryInterface
 
     public function Download_attachment($studentsname, $filename)
     {
-        return response()->download(public_path('attachments/students/' . $studentsname . '/' . $filename));
+        return response()->download(public_path('Attachments/students/' . $studentsname . '/' . $filename));
     }
 
     /********************************************  Delete_attachment    *******************************************/
@@ -221,7 +227,7 @@ class StudentRepository implements StudentRepositoryInterface
     public function Delete_attachment($request)
     {
         // Delete img in server disk
-        Storage::disk('upload_attachments')->delete('attachments/students/' . $request->student_name . '/' . $request->filename);
+        Storage::disk('upload_attachments')->delete('Attachments/students/' . $request->student_name . '/' . $request->filename);
 
         // Delete in data
         image::where('id', $request->id)->where('filename', $request->filename)->delete();

@@ -55,3 +55,26 @@
     border-color: #17a2b8;
 }
 
+@media (max-width: 600px) and (min-width: 1px) {
+    .content-wrapper{
+        width: 100%;
+    }
+}
+
+@media ( min-width: 992px) {
+    .content-wrapper{
+        width: 75%;
+    }
+}
+
+@media ( min-width: 1300px) {
+    .content-wrapper{
+        width: 85%;
+    }
+}
+
+
+
+
+
+

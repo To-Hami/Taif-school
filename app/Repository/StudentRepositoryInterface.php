@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use http\Env\Request;
+
 interface StudentRepositoryInterface{
 
 
@@ -12,7 +14,7 @@ interface StudentRepositoryInterface{
     public function index();
 
     // Edit_Student
-    public function Edit_Student($id);
+    public function Edit_Student($request );
 
     // Show_Student
     public function Show_Student($id);

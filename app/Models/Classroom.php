@@ -12,13 +12,13 @@ class Classroom extends Model
     public $translatable = ['Name_Class'];
 
 
-    protected $table = 'Classrooms';
+    protected $table = 'classrooms';
     public $timestamps = true;
     protected $fillable=['Name_class','Grade_id'];
 
 
     // علاقة بين الصفوف المراحل الدراسية لجلب اسم المرحلة في جدول الصفوف
-    
+
 
 
     public function Grades()

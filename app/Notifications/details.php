@@ -32,7 +32,7 @@ class details extends Notification
         $detail = $this->detail;
 
         return (new MailMessage)
-            ->line('Details mail is : ' . $detail);
+            ->line('تفاصيل الايميل المرسل : ' . $detail);
 
     }
 

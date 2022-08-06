@@ -9,7 +9,7 @@ class CreatAttachmentsTable extends Migration
 
     public function up()
     {
-        Schema::create('attachments', function (Blueprint $table) {
+        Schema::create('Attachments', function (Blueprint $table) {
             $table->id();
             $table->string('file_name', 999);
             $table->unsignedBigInteger('attachment_id')->nullable();

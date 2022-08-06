@@ -111,7 +111,15 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="photos"><h5>أضف صور البرنامج :</h5></label>
-                                            <input type="file" name="images[]" multiple class="form-control">
+                                            <div style="width: 500px;height: 50px;background-color: #f2f2f2;color: #0b0b0b;
+                                        border: 2px solid #17a2b8;position: relative;z-index: 1;border-radius: 20px ">
+                                        <span style="position:absolute;display: block;margin: 10px 20px 0 0 ">
+                                            أضغط لرفع  الصور
+                                            <i class="fa fa-image"></i>
+                                        </span>
+                                                <input style="width: 100%;height: 100%;opacity: 0"
+                                                       type="file" name="images[]" multiple class="form-control">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">

@@ -10,7 +10,7 @@ class Moshref_table_seeder extends Seeder
         $user = \App\User::create([
             'first_name' => 'El ',
             'last_name' => 'Moshref',
-            'email' => 'moshref@app.com',
+            'email' => 'toohami09952@gmail.com',
             'password' => bcrypt('password'),
         ]);
         $user->attachRole('moshref');

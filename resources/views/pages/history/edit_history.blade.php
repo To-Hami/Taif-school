@@ -148,7 +148,7 @@
                                         @foreach($programs->images as $img)
                                             <div class="col-md-4">
                                                 <img style="width: 400px;height: 400px"
-                                                     src="{{asset('attachments/programs/'.$programs->name . '/'.$img->images)}}">
+                                                     src="{{asset('Attachments/programs/'.$programs->name . '/'.$img->images)}}">
 
                                             </div>
                                         @endforeach

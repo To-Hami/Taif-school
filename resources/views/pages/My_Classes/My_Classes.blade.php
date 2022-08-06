@@ -36,30 +36,30 @@
                             </ul>
                         </div>
                     @endif
-{{--                    @if (auth()->user()->hasPermission('edit_grades'))--}}
+                    {{--                    @if (auth()->user()->hasPermission('edit_grades'))--}}
 
-{{--                        <button type="button" class="button x-small" data-toggle="modal" data-target="#exampleModal">--}}
-{{--                            {{ trans('My_Classes_trans.add_class') }}--}}
-{{--                        </button>--}}
+                    {{--                        <button type="button" class="button x-small" data-toggle="modal" data-target="#exampleModal">--}}
+                    {{--                            {{ trans('My_Classes_trans.add_class') }}--}}
+                    {{--                        </button>--}}
 
-{{--                        <button type="button" class="button x-small" id="btn_delete_all">--}}
-{{--                            {{ trans('My_Classes_trans.delete_checkbox') }}--}}
-{{--                        </button>--}}
-{{--                    @endif--}}
+                    {{--                        <button type="button" class="button x-small" id="btn_delete_all">--}}
+                    {{--                            {{ trans('My_Classes_trans.delete_checkbox') }}--}}
+                    {{--                        </button>--}}
+                    {{--                    @endif--}}
 
-{{--                    <br><br>--}}
+                    {{--                    <br><br>--}}
 
-{{--                    <form action="{{ route('Filter_Classes') }}" class="fancyselect" method="POST">--}}
-{{--                        {{ csrf_field() }}--}}
-{{--                        <select class="selectpicker " data-style="btn-info" name="Grade_id" required--}}
-{{--                                onchange="this.form.submit()">--}}
-{{--                            <option value="" selected--}}
-{{--                                    disabled>{{ trans('My_Classes_trans.Search_By_Grade') }}</option>--}}
-{{--                            @foreach ($Grades as $Grade)--}}
-{{--                                <option value="{{ $Grade->id }}">{{ $Grade->Name }}</option>--}}
-{{--                            @endforeach--}}
-{{--                        </select>--}}
-{{--                    </form>--}}
+                    {{--                    <form action="{{ route('Filter_Classes') }}" class="fancyselect" method="POST">--}}
+                    {{--                        {{ csrf_field() }}--}}
+                    {{--                        <select class="selectpicker " data-style="btn-info" name="Grade_id" required--}}
+                    {{--                                onchange="this.form.submit()">--}}
+                    {{--                            <option value="" selected--}}
+                    {{--                                    disabled>{{ trans('My_Classes_trans.Search_By_Grade') }}</option>--}}
+                    {{--                            @foreach ($Grades as $Grade)--}}
+                    {{--                                <option value="{{ $Grade->id }}">{{ $Grade->Name }}</option>--}}
+                    {{--                            @endforeach--}}
+                    {{--                        </select>--}}
+                    {{--                    </form>--}}
 
 
                     <br><br>
@@ -69,8 +69,7 @@
                                style="text-align: center">
                             <thead>
                             <tr>
-                                <th><input name="select_all" id="example-select-all" type="checkbox"
-                                           onclick="CheckAll('box1', this)"/></th>
+
                                 <th>#</th>
                                 <th>{{ trans('My_Classes_trans.Name_class') }}</th>
                                 <th>{{ trans('My_Classes_trans.Name_Grade') }}</th>
@@ -92,31 +91,36 @@
                             @foreach ($List_Classes as $My_Class)
                                 <tr>
                                     <?php $i++; ?>
-                                    <td><input type="checkbox" value="{{ $My_Class->id }}" class="box1"></td>
                                     <td>{{ $i }}</td>
                                     <td>{{ $My_Class->Name_Class }}</td>
                                     <td>{{ $My_Class->Grades->Name }}</td>
                                     <td>
                                         @if (auth()->user()->hasPermission('edit_grades'))
 
-                                                <a href="{{route('Classrooms.students', [$My_Class->Grades->id,$My_Class->id])}}">
-                                                    <button type="button" class="btn btn-info btn-sm" >
+                                            <a href="{{route('Classrooms.students', [$My_Class->Grades->id,$My_Class->id])}}">
+                                                <button type="button" class="btn btn-info btn-sm">
 
                                                     <i class="fa fa-plus"></i>
-                                                  </button>
-                                                </a>
+                                                </button>
+                                            </a>
 
+                                        @else
+                                            <a href="#">
+                                                <button type="button" class="btn btn-info btn-sm disabled">
 
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </a>
 
-{{--                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal"--}}
-{{--                                                    data-target="#edit{{ $My_Class->id }}"--}}
-{{--                                                    title="{{ trans('Grades_trans.Edit') }}"><i class="fa fa-edit"></i>--}}
-{{--                                            </button>--}}
-{{--                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"--}}
-{{--                                                    data-target="#delete{{ $My_Class->id }}"--}}
-{{--                                                    title="{{ trans('Grades_trans.Delete') }}"><i--}}
-{{--                                                    class="fa fa-trash"></i>--}}
-{{--                                            </button>--}}
+                                            {{--                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal"--}}
+                                            {{--                                                    data-target="#edit{{ $My_Class->id }}"--}}
+                                            {{--                                                    title="{{ trans('Grades_trans.Edit') }}"><i class="fa fa-edit"></i>--}}
+                                            {{--                                            </button>--}}
+                                            {{--                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"--}}
+                                            {{--                                                    data-target="#delete{{ $My_Class->id }}"--}}
+                                            {{--                                                    title="{{ trans('Grades_trans.Delete') }}"><i--}}
+                                            {{--                                                    class="fa fa-trash"></i>--}}
+                                            {{--                                            </button>--}}
 
                                         @endif
 

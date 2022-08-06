@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\books;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\HistoryRequest;
 use App\Maneger;
 use App\Models\Attachment;
 use App\Models\Book;
 use App\Models\BookImage;
+use App\Models\History;
 use App\Models\ProgramImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -14,22 +16,26 @@ use Illuminate\Support\Facades\Storage;
 
 class booksController extends Controller
 {
+
 /***********************   index   *******************************************/
 
 
     public function index()
     {
         $books = Book::all();
-        return view('Pages.books.index', compact('books'));
+        $histories = History::all();
+        foreach ( $histories as $history) {
+            return view('pages.books.index', compact('books','history'));
+        }
     }
-
-
     /***********************   create   *******************************************/
 
     public function create()
     {
-
-        return view('Pages.books.add_book');
+        $histories = History::all();
+        foreach ( $histories as $history) {
+            return view('pages.books.add_book',compact('history'));
+        }
     }
 
 
@@ -37,13 +43,13 @@ class booksController extends Controller
 
     public function store(Request $request)
     {
+
         $book = new Book();
 
         $book->name = $request->name;
         $book->details = $request->details;
 
         $book->save();
-
 
         if ($request->hasFile('attachment')) {
 
@@ -57,6 +63,7 @@ class booksController extends Controller
             $attachments->save();
 
             // move pic
+
             $imageName = $request->attachment->getClientOriginalName();
             $request->attachment->move(public_path('Attachments/books'), $imageName);
         }
@@ -68,7 +75,7 @@ class booksController extends Controller
         if ($request->hasfile('images')) {
             foreach ($request->file('images') as $images) {
                 $name = $images->getClientOriginalName();
-                $images->storeAs('attachments/books/images/' . $book->name, $images->getClientOriginalName(), 'upload_attachments');
+                $images->storeAs('Attachments/books/images/' . $book->id, $images->getClientOriginalName(), 'upload_attachments');
                 $images = new BookImage();
                 $images->images = $name;
                 $images->images_id = $book->id;
@@ -107,7 +114,7 @@ class booksController extends Controller
         if ($request->hasfile('images')) {
             foreach ($request->file('images') as $images) {
                 $name = $images->getClientOriginalName();
-                $images->storeAs('attachments/books/images/' . $book->name, $images->getClientOriginalName(), 'upload_attachments');
+                $images->storeAs('Attachments/books/images/' . $book->id, $images->getClientOriginalName(), 'upload_attachments');
                 $images = new BookImage();
                 $images->images = $name;
                 $images->images_id = $book->id;
@@ -129,24 +136,43 @@ class booksController extends Controller
 
     public function edit(Book $book)
     {
-
-        return view('Pages.books.edit_book',compact('book'));
+        $histories = History::all();
+        foreach ( $histories as $history) {
+            return view('pages.books.edit_book', compact('book','history'));
+        }
     }
 
-    /***********************   view   *******************************************/
+    public function showImage($id )
+    {
+         $books = Book::whereId($id)->get();
+        $histories = History::all();
+        foreach ( $histories as $history) {
+            foreach ($books as $book) {
+                return view('pages.books.showImage', compact('book','history'));
+
+            }
+        }
+
+
+    }
+
+    /***********************   view Book  *******************************************/
 
     public function view($id)
 
     {
         $books = Book::whereId($id)->get();
             $attachments = Attachment::where('attachment_id', $id)->get();
-            foreach ($attachments as $attachment) {
-                $file_name = $attachment->file_name;
+              foreach ($attachments as $attachment) {
+                   $file_name = $attachment->file_name;
                    $book_file = Storage::disk('public_uploads')->getDriver()->getAdapter()->applyPathPrefix($file_name);
                 return  response()->file($book_file);
         }
 
     }
+
+
+
 
     /***********************   download   *******************************************/
 
@@ -155,9 +181,9 @@ class booksController extends Controller
     {
         $books = Book::whereId($id)->get();
             $attachments = Attachment::where('attachment_id', $id)->get();
-            foreach ($attachments as $attachment) {
-                $file_name = $attachment->file_name;
-                $contents = Storage::disk('public_uploads')->getDriver()->getAdapter()->applyPathPrefix($file_name);
+                foreach ($attachments as $attachment) {
+                   $file_name = $attachment->file_name;
+                   $contents = Storage::disk('public_uploads')->getDriver()->getAdapter()->applyPathPrefix($file_name);
                 return response()->download($contents);
             }
 
@@ -170,7 +196,7 @@ class booksController extends Controller
     public function destroy(Book  $book)
 
     {
-       Storage::disk('public_uploads')->deleteDirectory('/images/'.$book->name);
+       Storage::disk('public_uploads')->deleteDirectory('/images/'.$book->id);
 
         $book->delete();
         toastr()->success(trans('messages.Delete'));
